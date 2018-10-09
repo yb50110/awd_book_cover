@@ -1,0 +1,157 @@
+// --------------------------------------------------------------
+// -------------------- Font ------------------------------------
+// --------------------------------------------------------------
+@import url('https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy:400,400i');
+
+// --------------------------------------------------------------
+// -------------------- Variables -------------------------------
+// --------------------------------------------------------------
+$red: #e22326;
+$white: #ffffff;
+$blue: #02aff3;
+$black: #231d1f;
+
+// --------------------------------------------------------------
+// -------------------- Mixin -----------------------------------
+// --------------------------------------------------------------
+@mixin centered_style() {
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+// --------------------------------------------------------------
+// -------------------- Style -----------------------------------
+// --------------------------------------------------------------
+html, body {
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+.container {
+  background-color: #000000;
+  position: relative;
+  height: 100vh;
+
+  .cover {
+    @include centered_style;
+    background-color: $red;
+    overflow: hidden;
+    height: 600px;
+    width: 404px;
+
+    [class^="author"] {
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      text-align: center;
+      position: absolute;
+      font-size: 0.75em;
+      width: 100%;
+      opacity: 0;
+      animation: fade_in 0.5s ease forwards;
+      animation-delay: 6s;
+
+      &[class$="firstname"] {
+        top: 105px;
+      }
+      &[class$="lastname"] {
+        top: 485px;
+      }
+    }
+
+    .eyes {
+      background-image: url('../img/bg.svg');
+      transform: rotate(90deg) scale(0.5);
+      height: 100%;
+      width: 100%;
+      animation: eye_intro 2s ease forwards;
+      animation-delay: 3.5s;
+
+      .eyeball {
+        @include centered_style;
+        height: 322px;
+        width: 322px;
+
+        .iris {
+          @include centered_style;
+          background-color: $blue;
+          border-radius: 50%;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+          animation: scale_in 1s ease forwards;
+          animation-delay: 1.5s;
+        }
+
+        .pupil {
+          @include centered_style;
+          background-color: $black;
+          border-radius: 50%;
+          height: 180px;
+          width: 180px;
+          opacity: 0;
+          animation: scale_in 1s ease forwards;
+          animation-delay: 1s;
+
+          h1 {
+            @include centered_style;
+            text-align: center;
+            font-weight: 100;
+            font-size: 5em;
+            color: $white;
+            height: 77px;
+            opacity: 0;
+            animation: fade_in 1s ease forwards;
+            animation-delay: 5.5s;
+          }
+        }
+      }
+    }
+
+    .eyeshape {
+      @include centered_style;
+      background-image: url('../img/bg_transparent.svg');
+    }
+
+    .eyelids {
+      transform: rotate(45deg);
+      position: absolute;
+      background: $red;
+      height: 400px;
+      width: 400px;
+      top: -110px;
+      border-bottom-right-radius: 100%;
+      animation: blink 1s ease forwards;
+      animation-delay: 2.5s;
+    }
+  }
+}
+
+// --------------------------------------------------------------
+// -------------------- Animation -------------------------------
+// --------------------------------------------------------------
+@keyframes scale_in {
+  0%    { transform: scale(0); opacity: 0; }
+  75%   { transform: scale(0.75); opacity: 1; }
+  100%  { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade_in {
+  0%    { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+@keyframes eye_intro {
+  0%    { transform: rotate(90deg) scale(0.5); }
+  50%   { transform: rotate(0) scale(0.5); }
+  100%  { transform: rotate(0) scale(1); }
+}
+
+@keyframes blink {
+  0%    { top: -110px; opacity: 1; }
+  50%   { top: 70px; opacity: 1; }
+  75%   { top: -100px; opacity: 1;}
+  100%  { top: -110px; opacity: 0; }
+}
